@@ -8,6 +8,7 @@ RUN apk add --no-cache openjdk8 openjdk8-jre && \
 
 RUN apk add --no-cache git \
                        maven \
+                       bash \
                        postgresql-client \
                        perl \
                        perl-utils
@@ -76,5 +77,6 @@ ENV PGPORT=5432
 COPY ./build.sh /home/intermine
 RUN chmod a+rx /home/intermine/build.sh
 WORKDIR /home/intermine/intermine
-
+CMD ["cd WORKDIR"]
+CMD ["ln -s alliancemine/data"]
 CMD ["/bin/sh","/home/intermine/build.sh"]
