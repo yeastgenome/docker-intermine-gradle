@@ -110,33 +110,29 @@ if [ ! -f /home/intermine/intermine/${MINE_NAME:-biotestmine}/project.xml ]; the
         cp /home/intermine/intermine/configs/project.xml /home/intermine/intermine/${MINE_NAME:-biotestmine}/
         echo "$(date +%Y/%m/%d-%H:%M) Set correct source path in project.xml"
         sed -i 's/'${IM_DATA_DIR:-DATA_DIR}'/\/home\/intermine\/intermine\/data/g' /home/intermine/intermine/${MINE_NAME:-biotestmine}/project.xml
-        sed -i 's/dump="true"/dump="flase"/g' /home/intermine/intermine/${MINE_NAME:-biotestmine}/project.xml     
+        sed -i 's/dump="true"/dump="false"/g' /home/intermine/intermine/${MINE_NAME:-biotestmine}/project.xml
     else
         echo "$(date +%Y/%m/%d-%H:%M) Copy project.xml to ~/biotestmine/project.xml" #>> /home/intermine/intermine/build.progress
         cp /home/intermine/intermine/biotestmine/data/project.xml /home/intermine/intermine/biotestmine/
 
         echo "$(date +%Y/%m/%d-%H:%M) Set correct source path in project.xml" #>> /home/intermine/intermine/build.progress
         sed -i 's/'${IM_DATA_DIR:-DATA_DIR}'/\/home\/intermine\/intermine\/data/g' /home/intermine/intermine/biotestmine/project.xml
-        sed -i 's/dump="true"/dump="flase"/g' /home/intermine/intermine/biotestmine/project.xml
-
+        sed -i 's/dump="true"/dump="false"/g' /home/intermine/intermine/biotestmine/project.xml
     fi
 else
     echo "$(date +%Y/%m/%d-%H:%M) Set correct source path in project.xml"
+    cp /home/intermine/intermine/alliancemine/data/project.xml /home/intermine/intermine/alliancemine/
     sed -i "s~${IM_DATA_DIR:-DATA_DIR}~/home/intermine/intermine/data~g" /home/intermine/intermine/${MINE_NAME:-biotestmine}/project.xml
-    sed -i 's/dump="true"/dump="flase"/g' /home/intermine/intermine/${MINE_NAME:-biotestmine}/project.xml
+    sed -i 's/dump="true"/dump="false"/g' /home/intermine/intermine/${MINE_NAME:-biotestmine}/project.xml
 fi
 
 # Copy data
-if [ -d /home/intermine/intermine/data ]; then
+if [ -d /home/intermine/intermine/alliancemine/data ]; then
     echo "$(date +%Y/%m/%d-%H:%M) found user data directory"
-    echo "this is line 132"
-    if [ !  -n "$(find /home/intermine/intermine/data -maxdepth 0 -type d -empty 2>/dev/null)" ]; then
-      echo "In line 133"
-      cd /home/intermine/intermine/data/
-        for f in *.tar.gz; do
-            echo $f
-            tar xzf "$f" && rm "$f"
-        done
+    if [ !  -n "$(find /home/intermine/intermine/alliancemine/data -maxdepth 0 -type d -empty 2>/dev/null)" ]; then
+        cd /home/intermine/intermine/alliancemine/data/
+        tar -xf alliancemine-data.tar.gz
+        rm alliancemine-data.tar.gz
         cd /home/intermine/intermine
     fi
 else
