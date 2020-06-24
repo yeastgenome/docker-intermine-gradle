@@ -129,7 +129,6 @@ fi
 # Copy data
 if [ -d /home/intermine/intermine/alliancemine/data ]; then
     echo "$(date +%Y/%m/%d-%H:%M) found user data directory"
-    if [ !  -n "$(find /home/intermine/intermine/alliancemine/data -maxdepth 0 -type d -empty 2>/dev/null)" ]; then
         cd /home/intermine/intermine/alliancemine/data/
         tar -xf alliancemine-data.tar.gz
         rm alliancemine-data.tar.gz
