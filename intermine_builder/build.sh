@@ -108,19 +108,18 @@ if [ ! -f /home/intermine/intermine/${MINE_NAME:-biotestmine}/project.xml ]; the
     if [ -f /home/intermine/intermine/configs/project.xml ]; then
         echo "$(date +%Y/%m/%d-%H:%M) Copy project.xml to ~/${MINE_NAME:-biotestmine}/project.xml"
         cp /home/intermine/intermine/configs/project.xml /home/intermine/intermine/${MINE_NAME:-biotestmine}/
-        echo "$(date +%Y/%m/%d-%H:%M) Set correct source path in project.xml"
+        echo "$(date +%Y/%m/%d-%H:%M) Set correct source path in  ***first if **** project.xml"
         sed -i 's/'${IM_DATA_DIR:-DATA_DIR}'/\/home\/intermine\/intermine\/data/g' /home/intermine/intermine/${MINE_NAME:-biotestmine}/project.xml
         sed -i 's/dump="true"/dump="false"/g' /home/intermine/intermine/${MINE_NAME:-biotestmine}/project.xml
     else
         echo "$(date +%Y/%m/%d-%H:%M) Copy project.xml to ~/biotestmine/project.xml" #>> /home/intermine/intermine/build.progress
         cp /home/intermine/intermine/biotestmine/data/project.xml /home/intermine/intermine/biotestmine/
-
-        echo "$(date +%Y/%m/%d-%H:%M) Set correct source path in project.xml" #>> /home/intermine/intermine/build.progress
+        echo "$(date +%Y/%m/%d-%H:%M) Set correct source path in ***first else *** project.xml" #>> /home/intermine/intermine/build.progress
         sed -i 's/'${IM_DATA_DIR:-DATA_DIR}'/\/home\/intermine\/intermine\/data/g' /home/intermine/intermine/biotestmine/project.xml
         sed -i 's/dump="true"/dump="false"/g' /home/intermine/intermine/biotestmine/project.xml
     fi
 else
-    echo "$(date +%Y/%m/%d-%H:%M) Set correct source path in project.xml"
+    echo "$(date +%Y/%m/%d-%H:%M) Set correct source path in alliance else ***** project.xml"
     cp /home/intermine/intermine/alliancemine/data/project.xml /home/intermine/intermine/alliancemine/
     sed -i "s~${IM_DATA_DIR:-DATA_DIR}~/home/intermine/intermine/data~g" /home/intermine/intermine/${MINE_NAME:-biotestmine}/project.xml
     sed -i 's/dump="true"/dump="false"/g' /home/intermine/intermine/${MINE_NAME:-biotestmine}/project.xml
@@ -133,7 +132,6 @@ if [ -d /home/intermine/intermine/alliancemine/data ]; then
         tar -xf alliancemine-data.tar.gz
         rm alliancemine-data.tar.gz
         cd /home/intermine/intermine
-    fi
 else
     echo "$(date +%Y/%m/%d-%H:%M) No user data directory found"
     if [ ! -d /home/intermine/intermine/data/malaria ]; then
