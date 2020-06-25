@@ -35,7 +35,11 @@ services:
     volumes:
       - ./data/postgres:/var/lib/postgresql/data
     networks:
-      - intermine
+      default:
+        external:
+          name: intermine
+#    networks:
+#      - intermine
 
   solr:
     container_name: intermine_solr
@@ -49,7 +53,11 @@ services:
     volumes:
       - ./data/solr:/var/solr
     networks:
-      - intermine
+      default:
+        external:
+          name: intermine
+#    networks:
+#      - intermine
 
   tomcat:
     container_name: intermine_tomcat
@@ -61,7 +69,11 @@ services:
     ports:
       - ${TOMCAT_HOST_PORT:-9999}:${TOMCAT_PORT:-8080}
     networks:
-      - intermine
+      default:
+        external:
+          name: intermine
+#    networks:
+#      - intermine
 
 # volumes:
 #   PostgresDBData:
