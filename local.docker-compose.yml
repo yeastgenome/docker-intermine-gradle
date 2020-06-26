@@ -1,8 +1,4 @@
 version: "3"
-networks:
-  default:
-  external:
-  name: intermine
 services:
   intermine_builder:
     container_name: intermine_builder
