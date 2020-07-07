@@ -1,0 +1,3 @@
+docker pull intermine/solr
+docker pull intermine/postgres
+docker pull intermine/tomcat
